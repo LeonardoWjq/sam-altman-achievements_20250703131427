@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman</title>
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #f8f9fa;
+            --dark: #212529;
+            --light: #ffffff;
+            --accent: #17a2b8;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+        }
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark);
+            transition: all 0.3s;
+        }
+        section {
+            padding: 5rem 10%;
+        }
+        section:nth-child(even) {
+            background-color: var(--secondary);
+        }
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 1rem;
+        }
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80vh;
+            padding-top: 5rem;
+        }
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        .logo-container img {
+            max-width: 200px;
+            margin: 0 2rem;
+            transition: transform 0.3s;
+        }
+        .logo-container img:hover {
+            transform: scale(1.1);
+        }
+        .achievements {
+            list-style: none;
+        }
+        .achievements li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .achievements li::before {
+            content: "\2713";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+        .quote-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        blockquote {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-left: 5px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        blockquote:hover {
+            transform: translateY(-5px);
+        }
+        .resources {
+            list-style: none;
+        }
+        .resources li {
+            margin-bottom: 1rem;
+        }
+        .resources a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .resources a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0055aa;
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--light);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            .hero {
+                flex-direction: column;
+            }
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            section {
+                padding: 3rem 5%;
+            }
+            .logo-container {
+                flex-direction: column;
+            }
+            .logo-container img {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Sam Altman</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#early-life">Early Life</a></li>
+                <li><a href="#y-combinator">Y Combinator</a></li>
+                <li><a href="#openai">OpenAI</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#controversies">Controversies</a></li>
+                <li><a href="#vision">Future Vision</a></li>
+                <li><a href="#quotes">Quotes</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Sam Altman</h1>
+            <p>Sam Altman is an American entrepreneur, investor, and the CEO of OpenAI, a leading figure in the artificial intelligence boom. Born on April 22, 1985, he has become one of the most influential voices in technology, shaping the future of AI and its impact on society.</p>
+            <a href="#early-life" class="btn">Learn More</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://global-citizen.com/wp-content/uploads/2025/03/107418094-1716321352537-gettyimages-2153474140-AFP_34TH9TC-scaled.jpeg" alt="Sam Altman">
+        </div>
+    </section>
+
+    <section id="early-life">
+        <h2>Early Life & Education</h2>
+        <p>Born in Chicago and raised in St. Louis, Missouri, Sam Altman demonstrated an early interest in computers, learning to code at the young age of eight. This early passion for technology would shape his future career path and contributions to the tech industry.</p>
+        <p>Altman attended John Burroughs School in St. Louis before enrolling at Stanford University to study computer science. However, his entrepreneurial spirit led him to drop out after just two years in 2005 to co-found Loopt, a location-sharing mobile application. This early venture proved successful, and Loopt was eventually acquired for $43 million in 2012, marking the beginning of Altman's impressive career in technology and entrepreneurship.</p>
+    </section>
+
+    <section id="y-combinator">
+        <h2>Y Combinator Era</h2>
+        <p>Sam Altman served as president of Y Combinator (YC) from 2014 to 2019, during which time he significantly expanded the organization's reach and impact. Under his leadership, YC set ambitious goals, aiming to fund 1,000 new companies per year and playing a crucial role in the success of now-household names like Dropbox, Airbnb, and Reddit.</p>
+        <p>During his tenure, Altman launched several important initiatives, including YC Continuity, a $700 million equity fund designed to help successful YC companies scale, and YC Research, a non-profit research lab focused on advancing technology for the benefit of humanity. These initiatives reflected Altman's vision of supporting innovation at all stages and across various domains.</p>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Y_Combinator_logo.svg/1200px-Y_Combinator_logo.svg.png" alt="Y Combinator Logo">
+        </div>
+    </section>
+
+    <section id="openai">
+        <h2>OpenAI Leadership</h2>
+        <p>In 2015, Sam Altman co-founded OpenAI with the mission to ensure that artificial general intelligence (AGI) benefits all of humanity. He became CEO in 2019 and has since overseen the development of groundbreaking AI models that have transformed the technology landscape.</p>
+        <p>Under Altman's leadership, OpenAI has created revolutionary technologies like the GPT series of language models, DALL-E image generation system, and ChatGPT, which reached an unprecedented 100 million users within just two months of its launch. He has also secured major investments to fuel OpenAI's research and development, including a landmark $10 billion investment from Microsoft, establishing one of the most significant partnerships in AI history.</p>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/2560px-OpenAI_Logo.svg.png" alt="OpenAI Logo">
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2>Key Achievements & Innovations</h2>
+        <ul class="achievements">
+            <li>Co-founding OpenAI, one of the world's leading AI research organizations</li>
+            <li>Developing GPT-3 and GPT-4, revolutionary language models that have transformed natural language processing</li>
+            <li>Launching ChatGPT, which reached 100 million users faster than any consumer application in history</li>
+            <li>Creating DALL-E, an AI system capable of generating realistic images from text descriptions</li>
+            <li>Securing billions in funding for AI research, including a $10 billion investment from Microsoft</li>
+            <li>Advocating for ethical AI development and responsible deployment of advanced technologies</li>
+            <li>Transforming Y Combinator into one of the world's most influential startup accelerators</li>
+        </ul>
+    </section>
+
+    <section id="controversies">
+        <h2>Controversies & Challenges</h2>
+        <p>In November 2023, Sam Altman faced a significant professional challenge when he was briefly ousted from his position as CEO of OpenAI. The board cited concerns about his candor and leadership style, but following strong support from employees and investors, he was reinstated within days. This episode highlighted the complex governance challenges facing organizations at the cutting edge of AI development.</p>
+        <p>Altman has also faced legal challenges, including a lawsuit from Elon Musk regarding OpenAI's transition from a non-profit to a for-profit entity with a capped profit structure. Additionally, he has dealt with personal controversy in the form of a lawsuit from his sister alleging childhood abuse, allegations which Altman and his family have denied.</p>
+    </section>
+
+    <section id="vision">
+        <h2>Future Vision & Impact</h2>
+        <p>Sam Altman has articulated a bold vision for the future of artificial intelligence and its potential impact on society. He believes that superintelligence is on the horizon and that AI will dramatically accelerate scientific discovery across fields like medicine, climate science, and materials science.</p>
+        <p>Altman predicts that humanoid robots capable of performing physical labor are just 5-10 years away from becoming commonplace. While acknowledging that AI will displace some jobs, he maintains an optimistic view that new jobs will be created and that society will adapt to these changes. He envisions AI as a tool that will ultimately lead to broad societal benefits, including increased productivity, economic growth, and solutions to previously intractable problems.</p>
+    </section>
+
+    <section id="quotes">
+        <h2>Quotes & Insights</h2>
+        <div class="quote-container">
+            <blockquote>
+                "No matter what you choose, build stuff and be around smart people."
+            </blockquote>
+            <blockquote>
+                "Great execution is at least 10 times more important and a 100 times harder than a good idea."
+            </blockquote>
+            <blockquote>
+                "AI will probably most likely lead to the end of the world, but in the meantime, there'll be great companies."
+            </blockquote>
+            <blockquote>
+                "A big secret is that you can bend the world to your will a surprising percentage of the time—most people don't even try, and just accept that things are the way that they are."
+            </blockquote>
+        </div>
+    </section>
+
+    <section id="resources">
+        <h2>Resources & Further Reading</h2>
+        <ul class="resources">
+            <li><a href="https://time.com/6302353/sam-altman-openai-chatgpt-interview/" target="_blank">TIME - Sam Altman on the Future of AI</a></li>
+            <li><a href="https://www.youtube.com/watch?v=540v3iC_t3o" target="_blank">YouTube - Sam Altman: OpenAI CEO on GPT-4, ChatGPT, and the Future of AI</a></li>
+            <li><a href="https://www.youtube.com/watch?v=u-iA2-aGA0c" target="_blank">YouTube - Sam Altman: The Promise and Risks of Artificial Intelligence</a></li>
+            <li><a href="https://mitsloan.mit.edu/ideas-made-to-matter/podcast-openai-ceo-sam-altman-ai-for-good" target="_blank">MIT Sloan - Podcast: OpenAI CEO Sam Altman on AI for Good</a></li>
+            <li><a href="https://www.ted.com/talks/sam_altman_the_future_of_ai_and_humanity" target="_blank">TED Talk - Sam Altman: The Future of AI and Humanity</a></li>
+        </ul>
+    </section>
+
+    <section id="about">
+        <h2>About</h2>
+        <p>This website was created to provide a comprehensive overview of Sam Altman's life, career, and impact on the world of technology and artificial intelligence. All information is compiled from publicly available sources.</p>
+    </section>
+
+    <footer>
+        <p>Created by Pokee. July 2025.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
